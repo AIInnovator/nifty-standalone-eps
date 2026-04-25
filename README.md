@@ -81,7 +81,9 @@ free_float_ttm_earnings_i = ffmc_i * standalone_ttm_eps_i / lastPrice_i
 ├── README.md
 ├── requirements.txt
 ├── calculate_standalone_ttm_eps.py
-└── output/
+├── removed_items.md
+├── .gitignore
+└── output/                 # generated after running the script; not committed
     └── latest/
         ├── nifty50_standalone_ttm_eps_report.html
         ├── nifty50_standalone_ttm_eps.json
@@ -96,8 +98,8 @@ free_float_ttm_earnings_i = ffmc_i * standalone_ttm_eps_i / lastPrice_i
 Clone the repository:
 
 ```bash
-git clone https://github.com/AIInnovator/nifty-standalone-eps.git
-cd nifty-standalone-eps
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+cd YOUR_REPO
 ```
 
 Create a virtual environment:
@@ -164,17 +166,9 @@ Use a different NSE index name supported by the same NSE endpoint:
 python3 calculate_standalone_ttm_eps.py --index-name "NIFTY NEXT 50"
 ```
 
-## Optional CSV Fallback
-
-The default run uses live NSE index constituents and does not require a CSV file. If you want to run from a local constituent file instead, pass:
-
-```bash
-python3 calculate_standalone_ttm_eps.py --constituents-source csv --input path/to/ind_nifty50list.csv
-```
-
 ## Notes And Limitations
 
 - The script calculates standalone EPS because this repository is focused on standalone financials. NSE's published P/E methodology generally uses consolidated earnings where available, with standalone as a fallback.
 - NSE endpoints can throttle or block automated traffic. The script uses browser-like headers, retries, and local caching, but a rerun may be needed if NSE temporarily rejects a request.
-- Current constituents come from NSE at run time. A CSV can be supplied only as an explicit fallback.
+- Current constituents come from NSE at run time through `https://www.nseindia.com/api/equity-stockIndices?index=NIFTY+50`.
 - This is an analytical tool, not investment advice.
